@@ -1,4 +1,5 @@
-<div class="video-wrapper-inner"  ng-mousemove="showControls()" ng-mouseleave="delayHideControls()" ng-class="{'controls-visible': controlsVisible}">
+<div>
+<div ng-if="options.isM3U8 === false" class="video-wrapper-inner"  ng-mousemove="showControls()" ng-mouseleave="delayHideControls()" ng-class="{'controls-visible': controlsVisible}">
 
   <div>
     <div class="volume-info" ng-show="volumeChanged">
@@ -193,5 +194,12 @@
   </video>
 
 </div>
+  <i class="ion-android-arrow-back player-back" ng-class="{'visible': controlsVisible}" ng-click="closeVideoM3U8()"></i>
+<video-js ng-if="options.isM3U8" id="video-test-m3u8" class="vjs-default-skin" controls preload="auto" width="640" height="268">
+  <source ng-src="{{options.videoSrc}}" type="{{options.videoType}}">
+</video-js>
+
+</div>
+
 
 

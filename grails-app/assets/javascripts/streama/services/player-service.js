@@ -52,6 +52,12 @@ angular.module('streama').factory('playerService',
         videoOptions.videoType = video.defaultVideoFile.contentType;
         videoOptions.selectedVideoFile = video.defaultVideoFile;
         videoOptions.showDownloadButton = $rootScope.isDownloadButtonVisible;
+        videoOptions.isM3U8 = false;
+
+        if(videoOptions.videoSrc.toString().endsWith(".m3u8")){
+          videoOptions.isM3U8 = true;
+          videoOptions.videoType = "application/x-mpegURL";
+        }
 
         if(video.videoFiles && video.videoFiles.length){
           videoOptions.videoFiles = video.videoFiles;

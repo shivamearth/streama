@@ -18,7 +18,9 @@
     <asset:stylesheet src="vendor.css"/>
     <asset:stylesheet src="application.css"/>
     <g:linkRelIconSetting setting="${Settings.findByName('favicon').value}"></g:linkRelIconSetting>
-
+    <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
+    <script src="https://unpkg.com/video.js/dist/video.js"></script>
+    <script src="https://unpkg.com/@videojs/http-streaming/dist/videojs-http-streaming.js"></script>
     <script type="text/javascript">
         window.contextPath = "${request.contextPath}";
     </script>

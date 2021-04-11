@@ -25,7 +25,28 @@ angular.module('streama').directive('streamaVideoPlayer', [
         var skipIntro = true;         //Userflag intro should be skipped
         var minimizeOnOutro = true;   //Userflag skip to next episode on outro
         var videoSrc = $scope.options.videoSrc.toString();
+        var isM3U8 = $scope.options.isM3U8;
 
+
+        $scope.isInitialized = false;
+        $scope.isNextVideoShowing = false;
+        $scope.loading = true;
+        $scope.initialPlay = false;
+
+        if(isM3U8){
+          $scope.controlsVisible = true;
+          $scope.closeVideoM3U8 = closeVideoM3U8;
+
+          function closeVideoM3U8() {
+            $scope.options.onClose();
+          }
+
+          $timeout(function () {
+            if(isM3U8){
+              var player = videojs('video-test-m3u8');
+            }
+          });
+        }else{
         $scope.showControls = showControls;
         $scope.toggleSelectEpisodes = toggleSelectEpisodes;
         $scope.createNewPlayerSession = createNewPlayerSession;
@@ -43,10 +64,6 @@ angular.module('streama').directive('streamaVideoPlayer', [
         $scope.fullScreen = toggleFullScreen;
         $scope.getCustomSubtitleSize = getCustomSubtitleSize;
         $scope.next = $scope.options.onNext;
-        $scope.isInitialized = false;
-        $scope.isNextVideoShowing = false;
-        $scope.loading = true;
-        $scope.initialPlay = false;
 
         if (!$scope.options.isExternalLink) {
           $http.head(videoSrc)
@@ -624,7 +641,7 @@ angular.module('streama').directive('streamaVideoPlayer', [
           }
         }
 
-
+        }
       }
     }
   }]);
